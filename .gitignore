@@ -1,0 +1,10 @@
+.class
+.project
+.settings/
+target/
+*.iml
+.idea/
+*.sh
+*.bat
+*.log
+*.patch
