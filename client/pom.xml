@@ -15,9 +15,9 @@
     <!-- P R O J E C T D E S C R I P T I O N -->
     <!-- ====================================================================== -->
 
-    <artifactId>online-clipboard-server-scripts</artifactId>
+    <artifactId>online-clipboard-client</artifactId>
     <packaging>content-package</packaging>
-    <name>Online Clipboard Package Server Scripts</name>
+    <name>Online Clipboard Client Package</name>
 
     <build>
         <plugins>
@@ -53,7 +53,7 @@
                         <extensions>true</extensions>
                         <configuration>
                             <group>Free Works</group>
-                            <filterSource>src/main/content/META-INF/vault/filter.xml</filterSource>
+                            <filterSource>src/main/resources/vault/filter.xml</filterSource>
                         </configuration>
                     </plugin>
                 </plugins>

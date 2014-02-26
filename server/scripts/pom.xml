@@ -53,8 +53,33 @@
                         <extensions>true</extensions>
                         <configuration>
                             <group>Free Works</group>
-                            <filterSource>src/main/content/META-INF/vault/filter.xml</filterSource>
+                            <filterSource>src/main/resources/vault/filter.xml</filterSource>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <!-- here the phase you need -->
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${build.directory}/classes/apps/freeworks/oc</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/jsp</directory>
+                                            <includes>
+                                                <include>html.jsp</include>
+                                            </includes>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
