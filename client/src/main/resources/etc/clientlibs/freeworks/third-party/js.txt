@@ -1,2 +1,8 @@
+#base=jquery
+jquery-1.11.0.min.js
+
+#base=underscore
+underscore-min.js
+
 #base=bootstrap
 js/bootstrap.js

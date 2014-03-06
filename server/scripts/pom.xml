@@ -9,6 +9,7 @@
         <groupId>com.freeworks.webapps.onlineclipboard</groupId>
         <artifactId>online-clipboard</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <!-- ====================================================================== -->
@@ -34,6 +35,21 @@
     <profiles>
         <profile>
             <id>cq</id>
+            <dependencies>
+                <dependency>
+                  <groupId>org.apache.sling</groupId>
+                  <artifactId>org.apache.sling.commons.json</artifactId>
+                </dependency>
+                <dependency>
+                  <groupId>com.freeworks.webapps.onlineclipboard</groupId>
+                  <artifactId>online-clipboard-server-core</artifactId>
+                  <version>1.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                  <groupId>org.apache.commons</groupId>
+                  <artifactId>commons-lang3</artifactId>
+                </dependency>
+            </dependencies>
             <build>
                 <resources>
                     <resource>
@@ -67,7 +83,7 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${build.directory}/classes/apps/freeworks/oc</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/classes/apps/freeworks/oc</outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>src/main/jsp</directory>

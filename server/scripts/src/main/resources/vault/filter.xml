@@ -2,4 +2,5 @@
 <workspaceFilter version="1.0">
   <filter root="/apps/freeworks/oc" />
   <filter root="/content/freeworks/oc" />
+  <filter root="/content/freeworks/paste" />
 </workspaceFilter>
