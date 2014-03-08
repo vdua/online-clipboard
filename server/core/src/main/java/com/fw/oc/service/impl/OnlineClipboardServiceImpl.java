@@ -45,8 +45,8 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
 
     public void paste(ClipboardData data) throws Exception {
        if(slingRepository != null) {
+           Session session = slingRepository.loginAdministrative(null);
            try {
-               Session session = slingRepository.loginAdministrative(null);
                Node root = session.getRootNode();
                Node content = root.getNode("content");
                Node node = getOrCreatePath(session, content, "fw/oc/data");
@@ -58,6 +58,8 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
                session.save();
            } catch (RepositoryException e) {
                throw e;
+           }  finally {
+               session.logout();
            }
        }
     }
@@ -66,8 +68,8 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
     public JSONArray getData() throws Exception {
         JSONArray res = new JSONArray();
         if(slingRepository != null) {
+            Session session = slingRepository.loginAdministrative(null);
             try {
-                Session session = slingRepository.loginAdministrative(null);
                 Node root = session.getRootNode();
                 Node content = root.getNode("content");
                 Node node = getOrCreatePath(session, content, "fw/oc/data");
@@ -83,6 +85,8 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
                 }
             } catch (RepositoryException e) {
                 throw e;
+            } finally {
+                session.logout();
             }
         }
         return res;
