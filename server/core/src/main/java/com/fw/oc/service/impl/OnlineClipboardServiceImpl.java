@@ -52,7 +52,7 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
                Node node = getOrCreatePath(session, content, "fw/oc/data");
                String nodeName = System.currentTimeMillis() + "";
                Node dataNode = node.addNode(nodeName, JcrConstants.NT_UNSTRUCTURED);
-               dataNode.setProperty("data",data.getData());
+               dataNode.setProperty("data",new String(data.getData(), "UTF-8"));
                dataNode.setProperty("hostName",data.getHostName());
                dataNode.setProperty("ipAddress",data.getIpAddress());
                session.save();

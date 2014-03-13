@@ -1,6 +1,7 @@
 <%@include file="/libs/foundation/global.jsp"%>
 <%@ page session="false"
          contentType="text/html; charset=utf-8"
+         pageEncoding="UTF-8"
          import="com.fw.oc.service.OnlineClipboardService,
                  org.apache.sling.commons.json.JSONArray,
                  org.apache.sling.commons.json.JSONObject,
@@ -11,6 +12,7 @@
 %>
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
     <cq:includeClientLib categories="freeworks.onlineclipboard" />
 </head>
 <body>

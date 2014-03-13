@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Component(metatype = false)
 @Service(Servlet.class)
@@ -28,8 +29,8 @@ public class PasteServlet extends SlingAllMethodsServlet {
     private Logger logger = LoggerFactory.getLogger(PasteServlet.class);
 
     protected void doPost(SlingHttpServletRequest request,
-                          SlingHttpServletResponse response) throws ServletException {
-        String data = request.getParameter("data");
+                          SlingHttpServletResponse response) throws ServletException, UnsupportedEncodingException {
+        byte[] data = request.getRequestParameter("data").getString("UTF-8").getBytes("UTF-8");
         if(onlineClipboard != null) {
             try {
                 ClipboardData pasteData = new ClipboardData(request.getRemoteAddr(), request.getRemoteHost(), data);
