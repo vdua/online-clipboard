@@ -24,9 +24,9 @@ oc._ = _.noConflict();
                                .end()
                                .find(".data-user")
                                .text(data.hostName + " (" + data.ipAddress + ") ")
-                                .end()
-                                .find(".timestamp")
-                                .text(formatDate(+data.timestamp));
+                               .end()
+                               .find(".timestamp")
+                               .text(formatDate(+data.timestamp));
         },
 
         showData = function (data) {
@@ -34,22 +34,33 @@ oc._ = _.noConflict();
                 function (item) {
                     wrapClipBoardData($("#clipboard-content"), item);
                 });
+        },
+        submit = function (data) {
+            if (data.length > 0) {
+                $.ajax({
+                    url: "/content/freeworks/paste.jsp",
+                    method: "POST",
+                    data: {"data": data},
+                    async: false
+                }).done(function () {
+                    window.location.reload(true);
+                });
+            }
         };
 
     $(function () {
         var contentDiv = $("#clipboard-content"),
             data = contentDiv.data("oc-content");
         showData(data);
-        $("button").click(function () {
-            var data = $("textarea").val();
-            if (data.length > 0) {
-                $.ajax({
-                    url: "/content/freeworks/paste.jsp",
-                    method: "POST",
-                    data: {"data" : data}
-                }).done(function () {
-                    window.alert('done');
-                });
+        $("button").click(function (evnt) {
+            submit($("textarea").val());
+        });
+        $("textarea").keypress(function (evnt) {
+            var key = evnt.key || evnt.charCode || evnt.keyCode;
+            if (evnt.originalEvent.shiftKey === true && evnt.which === 13) {
+                $(this).attr("disabled", "disabled");
+                submit($("textarea").val());
+                evnt.preventDefault();
             }
         });
     });
