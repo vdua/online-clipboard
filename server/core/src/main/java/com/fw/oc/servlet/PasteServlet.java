@@ -28,13 +28,20 @@ public class PasteServlet extends SlingAllMethodsServlet {
 
     private Logger logger = LoggerFactory.getLogger(PasteServlet.class);
 
+    public void pasteData(String ip, String host, byte[] data) throws Exception{
+        if(onlineClipboard != null) {
+            ClipboardData pasteData = new ClipboardData(ip, host, data);
+            onlineClipboard.paste(pasteData);
+        }
+    }
+
+
     protected void doPost(SlingHttpServletRequest request,
                           SlingHttpServletResponse response) throws ServletException, UnsupportedEncodingException {
         byte[] data = request.getRequestParameter("data").getString("UTF-8").getBytes("UTF-8");
         if(onlineClipboard != null) {
             try {
-                ClipboardData pasteData = new ClipboardData(request.getRemoteAddr(), request.getRemoteHost(), data);
-                onlineClipboard.paste(pasteData);
+                 pasteData(request.getRemoteAddr(), request.getRemoteHost(),data);
             } catch (Exception e) {
                 try {
                     response.sendError(500);
