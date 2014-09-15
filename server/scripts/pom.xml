@@ -70,6 +70,7 @@
                         <configuration>
                             <group>Free Works</group>
                             <filterSource>src/main/resources/vault/filter.xml</filterSource>
+                            <targetURL>http://${crx.host}:${crx.port}/crx/packmgr/service.jsp</targetURL>
                         </configuration>
                     </plugin>
                     <plugin>

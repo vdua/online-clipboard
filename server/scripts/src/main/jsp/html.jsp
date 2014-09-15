@@ -9,6 +9,7 @@
 <%
     OnlineClipboardService oc = sling.getService(OnlineClipboardService.class);
     JSONArray data = oc.getData();
+    String remoteAddr = request.getRemoteAddr();
 %>
 <!DOCTYPE html>
 <head>
@@ -23,7 +24,7 @@
         <p> Copy from your clipboard and share it with others </p>
     </div>
 </div>
-<div class="page container">
+<div class="page container" data-client-ip="<%=remoteAddr%>">
     <div class="row">
         <div class="form-group col-md-12">
             <textarea name="textarea" class="form-control" placeholder="Paste your text here" rows="5"></textarea>

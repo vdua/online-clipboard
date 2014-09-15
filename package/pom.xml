@@ -85,6 +85,7 @@
                                     <target>/libs/oc/fw/install</target>
                                 </embedded>
                             </embeddeds>
+                            <targetURL>http://${crx.host}:${crx.port}/crx/packmgr/service.jsp</targetURL>
                         </configuration>
                     </plugin>
                 </plugins>

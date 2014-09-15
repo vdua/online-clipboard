@@ -108,7 +108,7 @@
                         <groupId>org.apache.sling</groupId>
                         <artifactId>maven-sling-plugin</artifactId>
                         <configuration>
-                            <slingUrl>http://localhost:4502/system/console</slingUrl>
+                            <slingUrl>http://${crx.host}:${crx.port}/system/console</slingUrl>
                         </configuration>
                     </plugin>
                     <plugin>
