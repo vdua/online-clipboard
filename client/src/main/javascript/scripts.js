@@ -1,4 +1,5 @@
-var oc = {};
+var oc = {},
+    urlRegex = /https?:\/\/[^\/\s]+(?:\/[^\/\s]*)*/g;
 oc.$ = jQuery.noConflict();
 oc._ = _.noConflict();
 (function ($, _) {
@@ -10,6 +11,8 @@ oc._ = _.noConflict();
                                     "</div>" +
                                 "</div>" +
                                 "<div class=\"clipboard-data panel-body\">" +
+                                    '<div class="text"></div>' +
+                                    '<div class="urls"></div>' +
                                 "</div>" +
                            "</div>",
         formatDate = function (timestamp) {
@@ -18,15 +21,21 @@ oc._ = _.noConflict();
                    b.getMinutes() + ":" + b.getSeconds();
         },
         wrapClipBoardData = function ($elem, data) {
-            $(dataHTMLTemplate).appendTo($elem)
-                               .find(".clipboard-data")
-                               .text(data.data)
-                               .end()
-                               .find(".data-user")
-                               .text(data.hostName + " (" + data.ipAddress + ") ")
-                               .end()
-                               .find(".timestamp")
-                               .text(formatDate(+data.timestamp));
+            var htmlClipboardEl = $(dataHTMLTemplate).appendTo($elem),
+                matchUrl = data.data.match(urlRegex),
+                clipboardDataUrls = htmlClipboardEl.find(".clipboard-data .urls");
+            htmlClipboardEl.find(".clipboard-data .text")
+                .text(data.data)
+                .end()
+                .find(".data-user")
+                .text(data.hostName + " (" + data.ipAddress + ") ")
+                .end()
+                .find(".timestamp")
+                .text(formatDate(+data.timestamp));
+
+            oc._.each(matchUrl, function (url, index) {
+                $("<a></a>").attr("href", url).text("[1] " + url).appendTo(clipboardDataUrls);
+            });
         },
 
         showData = function (data) {
