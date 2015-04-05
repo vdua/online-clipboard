@@ -86,6 +86,14 @@
                     <groupId>org.apache.sling</groupId>
                     <artifactId>org.apache.sling.commons.json</artifactId>
                   </dependency>
+                <dependency>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.adobe.granite</groupId>
+                    <artifactId>com.adobe.granite.xssprotection</artifactId>
+                </dependency>
             </dependencies>
             <build>
                 <plugins>

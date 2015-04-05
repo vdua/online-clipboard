@@ -111,6 +111,12 @@
               <artifactId>commons-lang3</artifactId>
               <version>3.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.adobe.granite</groupId>
+                <artifactId>com.adobe.granite.xssprotection</artifactId>
+                <version>5.5.8</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <!--
@@ -207,6 +213,7 @@
                 <module>client</module>
                 <module>server/scripts</module>
                 <module>server/core</module>
+                <module>package</module>
             </modules>
         </profile>
     </profiles>

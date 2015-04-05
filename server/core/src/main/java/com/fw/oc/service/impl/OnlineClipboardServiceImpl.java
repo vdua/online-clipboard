@@ -1,5 +1,6 @@
 package com.fw.oc.service.impl;
 
+import com.adobe.granite.xss.XSSAPI;
 import com.fw.oc.common.ClipboardData;
 import com.fw.oc.service.OnlineClipboardService;
 import org.apache.felix.scr.annotations.Property;
@@ -42,6 +43,9 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
 
     @Reference
     private ResourceResolverFactory resourceResolverFactory;
+
+    @Reference
+    private XSSAPI xssapi;
 
     private Logger logger = LoggerFactory.getLogger(OnlineClipboardService.class);
 
@@ -102,7 +106,7 @@ public class OnlineClipboardServiceImpl implements OnlineClipboardService {
                 Node node = getOrCreatePath(session, content, "fw/oc/data");
                 String nodeName = System.currentTimeMillis() + "";
                 Node dataNode = node.addNode(nodeName, JcrConstants.NT_UNSTRUCTURED);
-                dataNode.setProperty("data", new String(data.getData(), "UTF-8"));
+                dataNode.setProperty("data", new String(data.getEncodedData(xssapi), "UTF-8"));
                 dataNode.setProperty("hostName", data.getHostName());
                 dataNode.setProperty("ipAddress", data.getIpAddress());
                 session.save();

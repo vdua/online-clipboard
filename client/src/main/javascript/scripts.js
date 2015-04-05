@@ -25,7 +25,7 @@ oc._ = _.noConflict();
                 matchUrl = data.data.match(urlRegex),
                 clipboardDataUrls = htmlClipboardEl.find(".clipboard-data .urls");
             htmlClipboardEl.find(".clipboard-data .text")
-                .text(data.data)
+                .html(data.data)
                 .end()
                 .find(".data-user")
                 .text(data.hostName + " (" + data.ipAddress + ") ")

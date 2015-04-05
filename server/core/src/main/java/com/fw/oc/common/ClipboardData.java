@@ -1,5 +1,10 @@
 package com.fw.oc.common;
 
+import org.apache.commons.lang3.StringUtils;
+import com.adobe.granite.xss.XSSAPI;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vdua
@@ -27,6 +32,25 @@ public class ClipboardData {
     }
 
     public byte[] getData() {
-        return data;
+        try {
+            String originalString = new String(data, "UTF-8");
+            String dataString = StringUtils.replace(originalString, "\n", "<br />");
+            return dataString.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public byte[] getEncodedData(XSSAPI xssapi) {
+        try {
+            String originalString = new String(data, "UTF-8");
+            String encodedString = xssapi.encodeForHTML(originalString);
+            String dataString = StringUtils.replace(encodedString, "\n", "<br />");
+            return dataString.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
